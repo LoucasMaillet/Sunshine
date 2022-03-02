@@ -1,0 +1,41 @@
+/* Here are writed every at-rules */
+
+@font-face {
+    font-family: "Zeniq";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("fonts/Zeniq.ttf") format('woff2');
+}
+
+@font-face {
+    font-family: "Light";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("fonts/Light.ttf") format('woff2');
+}
+
+@font-face {
+    font-family: "Neon";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("fonts/Neon.ttf") format('woff2');
+}
+
+@font-face {
+    font-family: "Ailerons";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("fonts/Ailerons.otf") format('woff2');
+}
+
+@font-face {
+    font-family: "8bit";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("8bit.ttf") format('woff2');
+}
