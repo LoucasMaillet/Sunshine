@@ -5,7 +5,7 @@ const Fs = require("fs"),
     Exp = require("express"),
     Ejs = require("ejs"),
     Https = require("https"),
-    INDENT = " ".repeat(2);
+    INDENT = " ".repeat(4);
 
 //* Functions
 
