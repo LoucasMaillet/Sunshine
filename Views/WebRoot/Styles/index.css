@@ -1,0 +1,327 @@
+/* HTML elements defaults and generals rules */
+
+* {
+    --c-body-i: #ffa125;
+    /* --c-body-i: #e23516; */
+    --c-footer: #393b570c;
+    --t-appear: .35s ease-in-out;
+    --t-menu: .05s cubic-bezier(0.2, 0.8, 0.2, .8);
+    --t-hover: .15s ease-in-out;
+    --r-menu: .5rem;
+
+    margin: 0;
+    position: relative;
+    background: none;
+    color: var(--c-body-f);
+    text-decoration: none;
+    font: inherit;
+    font-family: "Light", sans-serif;
+    border: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    * {
+        --c-body: #07050a;
+        --c-menu: #07050acc;
+        --c-body-f: #fff;
+        --c-body-d: #100f15;
+        --c-body-d-d: #b3b3b31e;
+        --c-body-d-f: #ffffff77;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    * {
+        --c-body: #f4f4f4;
+        --c-menu: #f4f4f4cc;
+        --c-body-f: #000;
+        --c-body-d: #e4e4e5;
+        --c-body-d-d: #ffffff1e;
+        --c-body-d-f: #00000087;
+    }
+    main a {
+        filter: drop-shadow(0 0 .025em var(--c-body-i));
+    }
+}
+
+@font-face {
+    font-family: "Zeniq";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("/Fonts/zeniq.ttf") format('woff2');
+}
+
+@font-face {
+    font-family: "light";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("/Fonts/light.ttf") format('woff2');
+}
+
+@font-face {
+    font-family: "Ailerons";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("/Fonts/ailerons.otf") format('woff2');
+}
+
+@font-face {
+    font-family: "8bit";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("/Fonts/8bit.ttf") format('woff2');
+}
+
+body {
+    background: var(--c-body);
+}
+
+h1 {
+    font-family: "Zeniq", sans-serif;
+    font-size: 8em;
+    color: transparent;
+    -webkit-text-stroke: .01em var(--c-body-f);
+}
+
+h1::before {
+    content: '//';
+    -webkit-text-stroke: .01em var(--c-body-i);
+}
+
+h2 {
+    font-family: "Ailerons", sans-serif;
+    font-size: 1.5em;
+}
+
+a {
+    cursor: pointer;
+    width: fit-content;
+}
+
+[menu] {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+    gap: .25em;
+    padding: .5em;
+    display: flex;
+    flex-flow: column wrap;
+    overflow: hidden;
+    border-radius: var(--r-menu);
+    background: var(--c-body-d);
+    transition: all var(--t-appear);
+    margin-top: .5em;
+    opacity: 0;
+    pointer-events: none;
+}
+
+[menu].focus {
+    top: 100%;
+    opacity: 1;
+    pointer-events: all;
+}
+
+[menu]>p {
+    color: var(--c-body-d-f);
+    font-size: .9em;
+}
+
+menu {
+    position: sticky;
+    top: 0;
+    width: calc(100% - 4em);
+    padding: 1em 2em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+    background: var(--c-menu);
+    transition: opacity .25s ease-in-out;
+}
+
+menu.appear {
+    opacity: 1;
+    pointer-events: all;
+}
+
+menu a,
+menu button,
+menu p {
+    padding: .5em .25em .25em .25em;
+    border-radius: calc(var(--r-menu) * .5);
+    transition: background .35s var(--t-menu);
+    white-space: nowrap;
+}
+
+menu>div {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+}
+
+menu>div>img {
+    width: 1em;
+    height: 1em;
+    transform: scale(2);
+    fill: var(--c-body-i);
+}
+
+menu>[href] {
+    transition: color var(--t-appear);
+    user-select: none;
+}
+
+menu [href]::after,
+main a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: .1em;
+    bottom: .1em;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--c-body-i);
+    transition: all var(--t-appear);
+}
+
+menu :not([menu])>[href].appear::after {
+    width: calc(100% - .5em);
+    background: var(--c-body-i);
+}
+
+menu [menu]>[href].appear {
+    color: var(--c-body-i);
+}
+
+menu :not([menuLink])[href].appear {
+    pointer-events: none;
+}
+
+menu button:hover,
+menu a:hover {
+    background: var(--c-body-d-d);
+}
+
+menu>form {
+    height: 1em;
+    display: flex;
+    align-items: center;
+}
+
+menu input {
+    padding: .5em 1.5em .25em .5em;
+    width: 7em;
+    min-width: 7em;
+    -webkit-text-fill-color: var(--c-body-d-f);
+    background: var(--c-body-d);
+    border-radius: var(--r-menu);
+}
+
+menu>form>[menu] {
+    width: calc(100% - 1em);
+}
+
+menu>form>svg {
+    position: absolute;
+    right: .25em;
+    height: 1.25em;
+    fill: var(--c-body-f);
+}
+
+menu>form>div.focus {
+    margin-top: 1.25em;
+}
+
+main {
+    display: flex;
+    flex-flow: row;
+    overflow: hidden;
+    gap: 100vw;
+}
+
+main>section {
+    min-width: calc(100vw - 4em);
+    min-height: 100vh;
+    height: fit-content;
+    padding: 2em;
+}
+
+main a {
+    color: var(--c-body-i);
+}
+
+main a::after {
+    content: '';
+    height: .05em;
+    transition: width var(--t-hover);
+}
+
+main a:hover::after,
+main a.appear::after {
+    width: 100%;
+}
+
+footer {
+    padding: 1em 4em;
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;
+    gap: 2em;
+    background: var(--c-footer);
+}
+
+footer section {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+}
+
+footer h2 {
+    text-decoration: underline solid var(--c-body-i) .1em;
+    text-underline-offset: .2em;
+    margin-bottom: .5em;
+}
+
+footer p {
+    font-size: .9em;
+    padding: .1em 0;
+}
+
+footer section:last-child p {
+    color: var(--c-body-d-f);
+}
+
+footer section:last-child>a::before {
+    content: "@ ";
+    color: var(--c-body-i);
+}
+
+footer>section>div {
+    gap: .5em;
+}
+
+footer div:first-of-type {
+    max-width: 8em;
+    display: flex;
+    flex-flow: row wrap;
+    gap: .25em;
+}
+
+footer div>span::before {
+    content: '#';
+    margin-right: .5em;
+    color: var(--c-body-i);
+}
+
+footer svg {
+    width: 1.8em;
+    fill: var(--c-body-i);
+}

@@ -1,0 +1,22 @@
+{
+    "company" : "Sunshine",
+    "link" : {
+        "github":"",
+        "nodejs":"",
+        "python":""
+    },
+    "contact" : {
+        "tel":"00000000",
+        "mail":"something@anyway.com",
+        "tweeter":"",
+        "insta":"",
+        "discord":""
+    },
+    "tags": [
+        "dev",
+        "web",
+        "student",
+        "sunny day",
+        "INSSE"
+    ]
+}

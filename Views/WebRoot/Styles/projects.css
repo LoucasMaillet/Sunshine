@@ -1,0 +1,9 @@
+
+#projects {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#projects>p {
+    height: 100vh;    
+}
