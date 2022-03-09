@@ -32,21 +32,29 @@ function renderFile(srcFile, destDir, options) {
     )
 }
 
+/**
+ * Create a path tree from a real path
+ * @param {PathTree | String} path 
+ * @returns 
+ */
+function PathTreeFrom(path = Path.dirname(__dirname)) {
+    const pathTree = new PathTree(path);
+    for (let child of Fs.readdirSync(path)) {
+        pathTree.pushPath(`${path}/${child}`);
+    };
+    return pathTree;
+}
+
 //* Class
 
 class PathTree {
     #path // Path
     /**
      * Create a path tree
-     * @param {String} path Starting path
+     * @param {PathTree | String} path Starting path
      */
-    constructor(path = Path.dirname(__dirname), getChild = true) {
+    constructor(path) {
         this.#path = path;
-        if (!getChild) return;
-        for (let child of Fs.readdirSync(path)) {
-            this.pushPath(`${path}/${child}`);
-        }
-        
     }
 
     /**
@@ -55,8 +63,12 @@ class PathTree {
      */
     pushPath(path) {
         const name = Path.parse(path).name;
-        if (Fs.lstatSync(path).isDirectory()) this[name] = new PathTree(path);
-        else this[name] = path;
+        if (Fs.lstatSync(path).isDirectory()) {
+            this[name] = new PathTree(path);
+            for (let child of Fs.readdirSync(path)) {
+                this[name].pushPath(`${path}/${child}`);
+            };
+        } else this[name] = path;
     }
 
     /**
@@ -65,7 +77,7 @@ class PathTree {
      * @returns {String}
      */
     abs(path) {
-        return `${path}`.replace(this, '');
+        return `${path}`.replace(this.#path, '');
     }
 
     /**
@@ -74,7 +86,7 @@ class PathTree {
      * @returns {PathTree}
      */
     remove(path) {
-        const pathTree = new PathTree(this.#path.replace(path, ''), false);
+        const pathTree = new PathTree(this.#path.replace(path, ''));
         for (let k in this) {
             if (typeof (this[k]) === "string") pathTree[k] = this[k].replace(path, '');
             else pathTree[k] = this[k].remove(path);
@@ -135,7 +147,10 @@ class Server {
     }
 }
 
+//* Exports
+
 module.exports = {
+    PathTreeFrom,
     PathTree,
     Server,
     renderFile
