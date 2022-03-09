@@ -35,5 +35,3 @@ wbs.bind(Root.Views.WebRoot);
 
 // Start
 wbs.start();
-
-console.log(WebRoot.toTree())
