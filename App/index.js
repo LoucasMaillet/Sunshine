@@ -3,7 +3,7 @@
 
 const Fs = require("fs"),
     Web = require("./web"),
-    Root = new Web.PathTree(),
+    Root = Web.PathTreeFrom(),
     WebRoot = Root.Views.WebRoot.asRoot(),
     Config = require(Root.App.config),
     Data = require(Root.Views.data);
